@@ -26,8 +26,8 @@ jobs:
     steps:
       - name: print-message
         run: echo "Hello ${GITHUB_ACTOR}, now you triggered workflow from the ${GITHUB_REF_NAME} branch."
-      - name: run-multiple-commands
-        if: ${{inputs.is_run-multiple-commands == 'true'}}
+      - if: ${{inputs.is_run-multiple-commands == 'true'}}
+        name: run-multiple-commands
         run: |
           echo "Your name is ${{inputs.name}}"
           echo "Your surname is ${{inputs.surname}}"
