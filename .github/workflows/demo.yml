@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print-message
-        run: echo "Hello ${GITHUB_ACTOR}, now you triggered workflow from ${GITHUB_BASE_REF} branch." 
+        run: echo "Hello ${GITHUB_ACTOR}, now you triggered workflow from ${GITHUB_REF_NAME} branch." 
