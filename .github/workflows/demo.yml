@@ -12,7 +12,7 @@ on:
         required: true
         default: 'Test'
         type: string
-      run-multiple-commands:
+      is_run-multiple-commands:
         description: Run multiple commands or not.
         required: true
         default: false
@@ -27,7 +27,7 @@ jobs:
       - name: print-message
         run: echo "Hello ${GITHUB_ACTOR}, now you triggered workflow from the ${GITHUB_REF_NAME} branch."
       - name: run-multiple-commands
-        if: ${{run-multiple-commands == 'true'}}
+        if: ${{inputs.is_run-multiple-commands == 'true'}}
         run: |
           echo "Your name is ${{inputs.name}}"
           echo "Your surname is ${{inputs.surname}}"
