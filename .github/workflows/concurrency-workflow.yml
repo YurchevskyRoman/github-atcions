@@ -27,8 +27,8 @@ jobs:
           path: ${{env.cache-dir}}
           key: ${{env.cache-key}}
       - name: Create directory if not exists.
-        if: steps.restore-cache.outputs.cache-hit != 'true'
-        run: mkdir ${{env.cache-dir}}
+        #if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: mkdir ${{env.cache-dir1}}
       - name: Print previous value.
         if: steps.restore-cache.outputs.cache-hit == 'true'
         run: |
