@@ -10,7 +10,7 @@ on:
         default: world
 concurrency: 
   group: concurrency-group
-  cancel-in-progress: true
+  #cancel-in-progress: true
 
 jobs:
   hello:
