@@ -34,7 +34,7 @@ jobs:
           export PREVIOUS_VALUE=$(cat ${{env.cache-dir}}/${{env.cache-file}})
           echo "Previous value was - ${PREVIOUS_VALUE}."
       - name: Processing data ...
-        run: sleep 1
+        run: sleep 10
       - name: Print name.
         run: echo Hello ${{inputs.name}}!!!
       - name: Update cache.
