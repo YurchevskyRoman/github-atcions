@@ -11,7 +11,7 @@ on:
 
 jobs:
   hello:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
       - name: Processing data ...
         run: sleep 3
