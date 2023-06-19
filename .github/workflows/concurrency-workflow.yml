@@ -1,5 +1,5 @@
 name: Concurrency with workflow.
-run-name: Triggered by ${{github.actor}} \#${{github.run_id}}.
+run-name: Triggered by ${{github.actor} - ${{github.run_id}}.
 on:
   workflow_dispatch:
     inputs:
@@ -7,13 +7,32 @@ on:
         description: Pass your name.
         required: true
         type: string
-        default: Hello
+        default: world
+#concurrency: concurrency-group
 
 jobs:
   hello:
     runs-on: ubuntu-latest
+    env:
+      cache-dir: cache-data
+      cache-file: prev-val
     steps:
+      - name: Restore data from cache.
+        id: restore-cache
+        uses: actions/cache@v3
+        with:
+          path: ${{env.cache-dir}}
+          key: concurrency-cache
+      - name: Print previous value.
+        if: steps.restore-cache.outputs.cache-hit == 'true'
+        run: |
+          echo 'Cache contents:'
+          echo $(ls -a ${{env.cache-dir})
+          export PREVIOUS_VALUE=$(cat ${{env.cache-dir}}/${{env.cache-file}})
+          echo "Previous value was - ${PREVIOUS_VALUE}."
       - name: Processing data ...
-        run: sleep 3
+        run: sleep 1
       - name: Print name.
-        run: echo Hello ${{inputs.name}}.
+        run: echo Hello ${{inputs.name}}!!!
+      - name: Update cache.
+        run: echo ${{inputs.name}} > ${{env.cache-dir}}/${{env.cache-file}}
