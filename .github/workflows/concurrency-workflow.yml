@@ -16,6 +16,8 @@ jobs:
     env:
       cache-dir: cache-data
       cache-file: prev-val
+      cache-dir1: cache-data1
+      cache-file1: prev-val1
       cache-key: concurrency-cachev
     steps:
       - name: Restore data from cache.
@@ -39,10 +41,10 @@ jobs:
       - name: Print name.
         run: echo Hello ${{inputs.name}}!!!
       - name: Update cache.
-        run: echo ${{inputs.name}} > ${{env.cache-dir}}/${{env.cache-file}}
+        run: echo ${{inputs.name}} > ${{env.cache-dir1}}/${{env.cache-file1}}
       - name: Save cache.
         id: save-cache
         uses: actions/cache/save@v3
         with:
-          path: ${{env.cache-dir}}
-          key: ${{env.cache-key}}
+          path: ${{env.cache-dir1}}
+          key: ${{env.cache-key1}}
