@@ -1,5 +1,5 @@
 name: Concurrency with workflow.
-run-name: Triggered by ${{github.actor} - ${{github.run_id}}.
+run-name: Triggered by ${{github.actor}} - ${{github.run_id}}.
 on:
   workflow_dispatch:
     inputs:
