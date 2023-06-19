@@ -1,0 +1,19 @@
+name: Concurrency with workflow.
+run-name: Triggered by ${{github.actor}} \#${{github.run_id}}.
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Pass your name.
+        required: true
+        type: string
+        default: Hello
+
+jobs:
+  hello:
+    runs-on: ubuntu:latest
+    steps:
+      - name: Processing data ...
+        run: sleep 3
+      - name: Print name.
+        run: echo Hello ${{inputs.name}}.
