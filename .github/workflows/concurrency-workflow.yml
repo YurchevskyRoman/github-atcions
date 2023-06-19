@@ -23,6 +23,9 @@ jobs:
         with:
           path: ${{env.cache-dir}}
           key: concurrency-cache
+      - name: Create directory if not exists.
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: mkdir ${{env.cache-dir}}
       - name: Print previous value.
         if: steps.restore-cache.outputs.cache-hit == 'true'
         run: |
