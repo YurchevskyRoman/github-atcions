@@ -35,13 +35,13 @@ jobs:
           export PREVIOUS_VALUE=$(cat ${{env.cache-dir}}/${{env.cache-file}})
           echo "Previous value was - ${PREVIOUS_VALUE}."
       - name: Processing data ...
-        run: sleep 10
+        run: sleep 1
       - name: Print name.
         run: echo Hello ${{inputs.name}}!!!
       - name: Update cache.
         run: echo ${{inputs.name}} > ${{env.cache-dir}}/${{env.cache-file}}
       - name: Save cache.
-        id: save-cache.
+        id: save-cache
         uses: actions/cache/save@v3
         with:
           path: ${{env.cache-dir}}
