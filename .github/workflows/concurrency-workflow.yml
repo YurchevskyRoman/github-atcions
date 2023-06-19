@@ -8,7 +8,9 @@ on:
         required: true
         type: string
         default: world
-concurrency: concurrency-group
+concurrency: 
+  group: concurrency-group
+  cancel-in-progress: true
 
 jobs:
   hello:
