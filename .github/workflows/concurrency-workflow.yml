@@ -8,41 +8,13 @@ on:
         required: true
         type: string
         default: world
-#concurrency: concurrency-group
+concurrency: concurrency-group
 
 jobs:
   hello:
     runs-on: ubuntu-latest
-    env:
-      cache-dir: cache-data1
-      cache-file: prev-val1
-      cache-key: concurrency-cachev
     steps:
-      - name: Restore data from cache.
-        id: restore-cache
-        uses: actions/cache/restore@v3
-        with:
-          path: ${{env.cache-dir}}
-          key: ${{env.cache-key}}
-      - name: Create directory if not exists.
-        if: steps.restore-cache.outputs.cache-hit != 'true'
-        run: mkdir ${{env.cache-dir}}
-      - name: Print previous value.
-        if: steps.restore-cache.outputs.cache-hit == 'true'
-        run: |
-          echo 'Cache contents:'
-          echo $(ls -a ${{env.cache-dir}})
-          export PREVIOUS_VALUE=$(cat ${{env.cache-dir}}/${{env.cache-file}})
-          echo "Previous value was - ${PREVIOUS_VALUE}."
       - name: Processing data ...
-        run: sleep 1
+        run: sleep 30
       - name: Print name.
         run: echo Hello ${{inputs.name}}!!!
-      - name: Update cache.
-        run: echo ${{inputs.name}} > ${{env.cache-dir}}/${{env.cache-file}}
-      - name: Save cache.
-        id: save-cache
-        uses: actions/cache/save@v3
-        with:
-          path: ${{env.cache-dir}}
-          key: ${{env.cache-key}}
