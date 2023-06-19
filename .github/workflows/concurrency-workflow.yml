@@ -16,13 +16,14 @@ jobs:
     env:
       cache-dir: cache-data
       cache-file: prev-val
+      cache-key: concurrency-cachev
     steps:
       - name: Restore data from cache.
         id: restore-cache
         uses: actions/cache@v3
         with:
           path: ${{env.cache-dir}}
-          key: concurrency-cache
+          key: ${{env.cache-key}}
       - name: Create directory if not exists.
         if: steps.restore-cache.outputs.cache-hit != 'true'
         run: mkdir ${{env.cache-dir}}
@@ -39,3 +40,9 @@ jobs:
         run: echo Hello ${{inputs.name}}!!!
       - name: Update cache.
         run: echo ${{inputs.name}} > ${{env.cache-dir}}/${{env.cache-file}}
+      - name: Save cache.
+        id: save-cache.
+        uses: actions/cache/save@v3
+        with:
+          path: ${{env.cache-dir}}
+          key: ${{env.cache-key}}
