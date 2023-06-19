@@ -27,7 +27,7 @@ jobs:
         if: steps.restore-cache.outputs.cache-hit == 'true'
         run: |
           echo 'Cache contents:'
-          echo $(ls -a ${{env.cache-dir})
+          echo $(ls -a ${{env.cache-dir}})
           export PREVIOUS_VALUE=$(cat ${{env.cache-dir}}/${{env.cache-file}})
           echo "Previous value was - ${PREVIOUS_VALUE}."
       - name: Processing data ...
